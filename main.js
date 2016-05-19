@@ -1,37 +1,22 @@
-//var foo = {};
-//var bar = Object.create(Object.prototype);
+function BeveRage(name, temperature) {
+    this.name = name;
+    this.temperature = temperature;
+}
 
-
-
-var johnDoe = {
-    firstName: "John",
-    lastName: "Doe",
-    sayName: function () {
-        return "My name is" + " " + this.firstName + " " + this.lastName;
-    }
+BeveRage.prototype.drink = function () {
+    console.log("I'm drinking" + " " + this.name);
 };
 
-var janeDoe = Object.create(johnDoe, {
-    firstName: {value: "Jane"},
-    greet:{
-        value: function (person) {
-        return "Hello," + " " + person.firstName;
-    }
-    }
-});
+function Coffee(type) {
+    BeveRage.call(this, "coffee", "hot");
+    this.type = type;
+}
 
-var jimSmith = Object.create(janeDoe, {
-    firstName: {value: "Jim"},
-    lastName: {value: "Smith"},
-   
-});
+Coffee.prototype = Object.create(BeveRage.prototype);
+Coffee.prototype.sip = function () {
+    console.log("Sipping some awesome" + " " + this.type + " " + this.name);
+};
 
-
-//alert(johnDoe.sayName());
-//alert(janeDoe.sayName() + " " + janeDoe.greet(johnDoe));
-//alert(jimSmith.sayName() + " " + jimSmith.greet(janeDoe));
-
-console.log(janeDoe._proto_ === johnDoe);
-console.log(jimSmith._proto_ === janeDoe);
-
+var water = new BeveRage("water", "cold");
+var coffee = new Coffee("bold dark roast");
 
