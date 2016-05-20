@@ -1,54 +1,67 @@
-function extend(target) {
-    if (!arguments[1]) {
-        return;
-    }
-    for (var ii = 1, ll = arguments.length; ii < ll; ii++) {
-      var source = arguments[ii];
-      for (var prop in source) {
-          if (!target[prop] && source.hasOwnProperty(prop)) {
-              target[prop] = source[prop];
-          }
-      }
-    }
+
+function Coffee() {
+    
 }
-
-
-function Person(name) {
-    this.name = name;
-}
-
-function Dog(name) {
-    this.name = name;
-}
-
-var speaker = {
-    speaker: function () {
-        return this.name + " is speaking.";
-    }
+Coffee.prototype.cost = function () {
+    return 5;
+};
+Coffee.small = function(coffeeObj) {
+    var cost = coffeeObj.cost();
+    coffeeObj = function () {
+    return cost - 1;
+   };
 };
 
-var mover = {
-    walk: function () {
-        return this.name + " is walking.";
-    },
-    run: function () {
-        return this.name + " is running.";
-    }
+Coffee.medium = function(coffeeObj) {};
+
+Coffee.large = function(coffeeObj) {
+    var cost = coffeeObj.cost();
+    coffeeObj = function () {
+    return cost + 1;
+    };
 };
 
-var arithmetic = {
-    add: function () {
-        return this.name + " is adding nubers together";
-    },
-    multiply: function () {
-        return this.name + "is multiplying nubers together ";
-    }
+Coffee.sugar = function(coffeeObj) {
+    var cost = coffeeObj.cost();
+    coffeeObj = function () {
+    return cost + .15;
+   };
+};
+
+Coffee.creamer = function(coffeeObj) {
+    var cost = coffeeObj.cost();
+    coffeeObj = function () {
+    return cost + .15;
+   };
+};
+
+Coffee.whippedCreamer = function(coffeeObj) {
+    var cost = coffeeObj.cost();
+    coffeeObj = function () {
+    return cost + .15;
+   };
+};
+
+Coffee.chocolate = function (coffeeObj) {
+    var cost = coffeeObj.cost();
+    coffeeObj = function () {
+    return cost + .15;
+   };
+};
+
+Coffee.mocha = function (coffeeObj) {
+   
+        Coffee.milk(coffeeObj);
+        Coffee.foam(coffeeObj);
+        Coffee.chocolate(coffeeObj);
+        
+       var cost = coffeeObj.cost();
+       coffeeObj.cost = function () {
+           return cost;
+       };
+
 };
 
 
-
-extend(Person.prototype, speaker, mover, arithmetic);
-extend(Dog.prototype, speaker, mover);
-
-var john = new Person("John Doe");
-var fido = new Dog("Fido");
+var coffee = new Coffee();
+var mocha = new Coffee();
