@@ -2,7 +2,7 @@ var dom = (function(){
     
    var _counter = 0,
    
-   function generateId() {
+   function  getInstance() {
        return "customId" + _counter++;
    }
    
@@ -11,9 +11,16 @@ var dom = (function(){
         el.id = id || generateId();
         return el;
    }
+   function createInstance() {
+       return {
+           generateId: generateId,
+           create: create
+       };
+   }
    return {
- generateId : generateId,
-    create: create,
+ getInstance: function() {
+     return instance || (instance = createInstance());
+ }
    };
     
 }());
@@ -23,20 +30,5 @@ var dom = (function(){
 
 
 
-//var dom = {
-  //  _counter :0,
-  //  generateId : function() {
-       // return "customId" + this._counter++;
-        
-    //},
-    //create: function(tagName, id) {
-       // var el = document.createElement(tagName);
-        
-        //el.id = id || this.generateId();
-      //  if (id) {
-          //  el.id = id;
-       // }
-        
-      //  return el;
-    //}
+
 //};
